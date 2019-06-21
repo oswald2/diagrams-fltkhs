@@ -17,3 +17,20 @@ Note that the Kaleidoscope does not look the same, as probably FLTK does not sup
 
 > stack exec PythagoreanTree
 
+> stack exec TangentAndNormal
+
+Note that TangentAndNormal does not render the text
+
+> stack exec ApollonianGaskets
+
+> stack exec Fibonacci
+
+Note that the text is not rendered.
+
+> stack exec FibonacciParadox
+
+> stack exec GrayCode
+
+> stack exec Pentaflake
+
+> stack exec VectorField

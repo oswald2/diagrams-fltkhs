@@ -320,3 +320,392 @@ executable TreeMap
   if !os(darwin) && !os(windows)
    ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
 
+executable TangentAndNormal
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             TangentAndNormal.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+executable VectorField
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             VectorField.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+executable ApollonianGaskets
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             ApollonianGaskets.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+executable Pentaflake
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             Pentaflake.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+
+executable GrayCode
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             GrayCode.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    split,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+
+executable Fibonacci
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             Fibonacci.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
+executable FibonacciParadox
+  if flag(examples)
+      buildable: True
+  else
+      buildable: False
+
+  -- .hs or .lhs file containing the Main module.
+  main-is:             FibonacciParadox.hs
+
+  -- Modules included in this executable, other than Main.
+  -- other-modules:
+
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:
+
+  -- Other library packages from which modules are imported.
+  build-depends:
+    base == 4.*,
+    fltkhs >= 0.8.0.2,
+    text >= 1.2.2.0,
+    diagrams,
+    diagrams-core,
+    diagrams-svg,
+    diagrams-lib,
+    diagrams-contrib,
+    svg-builder,
+    bytestring,
+    lens,
+    vector,
+    random,
+    MonadRandom,
+    palette,
+    containers,
+    colour,
+    diagrams-fltkhs -any
+
+
+  -- Directories containing source files.
+  hs-source-dirs:      examples
+
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  ghc-Options:  -threaded
+  if impl(ghc >= 7.10) && impl(ghc < 8.0) && flag(FastCompile)
+     ghc-Options: -fno-specialise -fmax-simplifier-iterations=0 -fsimplifier-phases=0
+  else
+     ghc-Options: -O2
+  if os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+  if os(darwin)
+   ghc-Options: "-optl-Wl,-lfltkc"
+  if !os(darwin) && !os(windows)
+   ghc-Options: -pgml g++ "-optl-Wl,--allow-multiple-definition" "-optl-Wl,--whole-archive" "-optl-Wl,-Bstatic" "-optl-Wl,-lfltkc" "-optl-Wl,-Bdynamic" "-optl-Wl,--no-whole-archive"
+
+
+
