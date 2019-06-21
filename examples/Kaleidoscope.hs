@@ -10,26 +10,21 @@ module Main where
 import           Control.Monad
 import           Control.Monad.Random
 
-import qualified Graphics.UI.FLTK.LowLevel.FL  as FL
-import           Graphics.UI.FLTK.LowLevel.Fl_Types
-import           Graphics.UI.FLTK.LowLevel.Fl_Enumerations
-import           Graphics.UI.FLTK.LowLevel.FLTKHS
-                                                ( Widget )
-import qualified Graphics.UI.FLTK.LowLevel.FLTKHS
-                                               as FL
-
 import           Data.Colour.Palette.ColorSet
 import           Data.List                      ( zipWith
                                                 , zipWith3
                                                 )
-import           Data.ByteString.Lazy           ( toStrict )
 
-import           Diagrams.Core.Compile
 import           Diagrams.TwoD
 import           Diagrams.Prelude
-import           Diagrams.Backend.SVG
-import           Graphics.Svg.Core
+import           Diagrams.Backend.FLTKHS
 
+import qualified Graphics.UI.FLTK.LowLevel.FL  as FL
+import           Graphics.UI.FLTK.LowLevel.Fl_Types
+import           Graphics.UI.FLTK.LowLevel.FLTKHS
+                                                ( Widget )
+import qualified Graphics.UI.FLTK.LowLevel.FLTKHS
+                                               as FL
 
 
 iterateIdx :: (Int -> a -> a) -> a -> [a]
@@ -88,37 +83,8 @@ mkConfetti n = evalRand $ confetti n
 example = confettiScope 39 0
 
 
-{-# INLINABLE withFlClip #-}
-withFlClip :: FL.Rectangle -> IO a -> IO a
-withFlClip rect action = do
-    FL.flcPushClip rect
-    a <- action
-    FL.flcPopClip
-    pure a
-
 drawScene :: Ref Widget -> IO ()
-drawScene widget = do
-    rectangle' <- FL.getRectangle widget
-    let coords@(x', y', w', h') = fromRectangle rectangle'
-    withFlClip rectangle' $ do
-        FL.flcSetColor whiteColor
-        FL.flcRectf rectangle'
-        let dia = renderDia
-                SVG
-                (SVGOptions (dims2D (fromIntegral w') (fromIntegral h'))
-                            Nothing
-                            ""
-                            []
-                            True
-                )
-                example
-            bs = toStrict $ renderBS dia
-        im <- FL.svgImageNew bs
-        case im of
-            Left  _     -> putStrLn ("drawScene: the generated SVG is invalid")
-            Right image -> do
-                FL.draw image (Position (X x') (Y y'))
-                FL.destroy image
+drawScene widget = renderFltkhs widget example
 
 
 main :: IO ()

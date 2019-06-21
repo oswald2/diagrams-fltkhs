@@ -94,6 +94,8 @@ drawScene widget = do
                 FL.destroy image
 
 
+
+
 main :: IO ()
 main = do
     let width  = 800
