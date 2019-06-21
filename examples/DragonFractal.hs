@@ -28,7 +28,7 @@ import           Data.ByteString.Lazy           ( toStrict )
 import           Diagrams.Core.Compile
 import           Diagrams.TwoD
 import           Diagrams.Prelude
-import           Diagrams.Backend.SVG
+import           Diagrams.Backend.FLTKHS
 import           Diagrams.TwoD.Layout.Grid
 import           Graphics.Svg.Core              ( renderBS )
 
@@ -44,16 +44,16 @@ dragonCurves = map (trailLike . (`at` origin))
 withPrevious diagrams = zipWith (<>) diagrams (mempty : diagrams # opacity 0.2)
 
 
-rememberOrder :: [Diagram B] -> [Diagram B]
 rememberOrder = zipWith named [0 :: Int ..]
 
-showOrder :: Diagram B -> Diagram B
 showOrder diagram = diagram
     # applyAll (map addArrow [0 .. length (names diagram)])
   where
     addArrow n = connectOutside' opts n (n + 1)
     opts = with & gaps .~ normalized 0.005 & headLength .~ tiny
 
+
+example :: QDiagram SVG V2 Double Any
 example =
     dragonCurves
         # withPrevious
@@ -66,37 +66,8 @@ example =
         # lw ultraThin
 
 
-{-# INLINABLE withFlClip #-}
-withFlClip :: FL.Rectangle -> IO a -> IO a
-withFlClip rect action = do
-    FL.flcPushClip rect
-    a <- action
-    FL.flcPopClip
-    pure a
-
 drawScene :: Ref Widget -> IO ()
-drawScene widget = do
-    rectangle' <- FL.getRectangle widget
-    let coords@(x', y', w', h') = fromRectangle rectangle'
-    withFlClip rectangle' $ do
-        FL.flcSetColor FL.whiteColor
-        FL.flcRectf rectangle'
-        let dia = renderDia
-                SVG
-                (SVGOptions (dims2D (fromIntegral w') (fromIntegral h'))
-                            Nothing
-                            ""
-                            []
-                            True
-                )
-                example
-            bs = toStrict $ renderBS dia
-        im <- FL.svgImageNew bs
-        case im of
-            Left  _     -> putStrLn ("drawScene: the generated SVG is invalid")
-            Right image -> do
-                FL.draw image (Position (X x') (Y y'))
-                FL.destroy image
+drawScene widget = renderFltkhs widget example
 
 
 main :: IO ()

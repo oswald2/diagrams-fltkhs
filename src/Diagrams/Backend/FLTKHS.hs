@@ -3,6 +3,8 @@
 module Diagrams.Backend.FLTKHS
 (
     renderFltkhs
+    , SVG
+    , B
 )
 where
 

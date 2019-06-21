@@ -29,9 +29,8 @@ import           Diagrams.Core.Compile
 import           Diagrams.TwoD
 import           Diagrams.TwoD.Sunburst
 import           Diagrams.Prelude
-import           Diagrams.Backend.SVG
+import           Diagrams.Backend.FLTKHS
 import           Diagrams.TwoD.Layout.Grid
-import           Graphics.Svg.Core              ( renderBS )
 
 
 aTree = unfoldTree (\n -> (0, replicate n (n - 1))) 6
@@ -40,40 +39,8 @@ example :: QDiagram SVG V2 Double Any
 example = sunburst aTree # centerXY # pad 1.1
 
 
-
-
-{-# INLINABLE withFlClip #-}
-withFlClip :: FL.Rectangle -> IO a -> IO a
-withFlClip rect action = do
-    FL.flcPushClip rect
-    a <- action
-    FL.flcPopClip
-    pure a
-
 drawScene :: Ref Widget -> IO ()
-drawScene widget = do
-    rectangle' <- FL.getRectangle widget
-    let coords@(x', y', w', h') = fromRectangle rectangle'
-    withFlClip rectangle' $ do
-        FL.flcSetColor whiteColor
-        FL.flcRectf rectangle'
-        let dia = renderDia
-                SVG
-                (SVGOptions (dims2D (fromIntegral w') (fromIntegral h'))
-                            Nothing
-                            ""
-                            []
-                            True
-                )
-                example
-            bs = toStrict $ renderBS dia
-        im <- FL.svgImageNew bs
-        case im of
-            Left  _     -> putStrLn ("drawScene: the generated SVG is invalid")
-            Right image -> do
-                FL.draw image (Position (X x') (Y y'))
-                FL.destroy image
-
+drawScene widget = renderFltkhs widget example
 
 main :: IO ()
 main = do

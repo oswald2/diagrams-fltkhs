@@ -22,14 +22,11 @@ import           Data.Colour.Palette.ColorSet
 import           Data.List                      ( zipWith
                                                 , zipWith3
                                                 )
-import           Data.ByteString.Lazy           ( toStrict )
-
 import           Diagrams.Core.Compile
 import           Diagrams.TwoD
 import           Diagrams.Prelude
-import           Diagrams.Backend.SVG
+import           Diagrams.Backend.FLTKHS
 import           Diagrams.TwoD.Layout.Grid
-import           Graphics.Svg.Core              ( renderBS )
 
 
 stops = mkStops [(saddlebrown, 0, 1), (peru, 0.5, 1), (saddlebrown, 1, 1)]
@@ -61,37 +58,8 @@ example = (tree 10 === square 1 # fillTexture b
                     <> (square 6.25 # fillTexture sky # lw none )
 
 
-{-# INLINABLE withFlClip #-}
-withFlClip :: FL.Rectangle -> IO a -> IO a
-withFlClip rect action = do
-    FL.flcPushClip rect
-    a <- action
-    FL.flcPopClip
-    pure a
-
 drawScene :: Ref Widget -> IO ()
-drawScene widget = do
-    rectangle' <- FL.getRectangle widget
-    let coords@(x', y', w', h') = fromRectangle rectangle'
-    withFlClip rectangle' $ do
-        FL.flcSetColor whiteColor
-        FL.flcRectf rectangle'
-        let dia = renderDia
-                SVG
-                (SVGOptions (dims2D (fromIntegral w') (fromIntegral h'))
-                            Nothing
-                            ""
-                            []
-                            True
-                )
-                example
-            bs = toStrict $ renderBS dia
-        im <- FL.svgImageNew bs
-        case im of
-            Left  _     -> putStrLn ("drawScene: the generated SVG is invalid")
-            Right image -> do
-                FL.draw image (Position (X x') (Y y'))
-                FL.destroy image
+drawScene widget = renderFltkhs widget example
 
 
 
